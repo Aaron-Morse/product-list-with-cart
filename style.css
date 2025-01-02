@@ -1,0 +1,126 @@
+@font-face {
+  font-family: "RedHatText";
+  src: url("assets/fonts/static/RedHatText-Regular.ttf");
+}
+@font-face {
+  font-family: "RedHatText SemiBold";
+  src: url("assets/fonts/static/RedHatText-SemiBold.ttf");
+}
+@font-face {
+  font-family: "RedHatText Bold";
+  src: url("assets/fonts/static/RedHatText-Bold.ttf");
+}
+
+:root {
+  --red: #c73b0f;
+  --rose-900: #260f08;
+  --rose-500: #87635a;
+  --rose-400: #ad8a85;
+  --rose-300: #caafa7;
+  --rose-100: #f5eeec;
+  --rose-50: #fcf8f6;
+  --green: #1ea575;
+  --black: #000;
+  --white: #fff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 1.5rem;
+  font-family: "RedHatText";
+  background-color: var(--rose-50);
+}
+
+h1 {
+  margin-bottom: 2rem;
+  font-family: "RedHatText Bold";
+  font-size: 2.5rem;
+}
+
+section {
+  margin-bottom: 1.5rem;
+}
+
+div.add-to-cart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img {
+  display: block;
+  width: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+button.add-to-cart::before {
+  content: url("assets/images/icon-add-to-cart.svg");
+  margin-right: 0.5rem;
+}
+
+button.add-to-cart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -1.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--white);
+  border: 1px solid var(--green);
+  border-radius: 2rem;
+  cursor: pointer;
+}
+
+h2 {
+  font-family: "RedHatText SemiBold";
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+h3 {
+  font-size: 14px;
+  color: var(--rose-500);
+  margin-bottom: 0.25rem;
+}
+
+p.price {
+  font-family: "RedHatText SemiBold";
+  color: var(--red);
+}
+
+div.cart {
+  padding: 1.5rem;
+  background-color: var(--white);
+  border-radius: 0.5rem;
+}
+
+p.cart-message {
+  margin-bottom: 1.5rem;
+  font-family: "RedHatText Bold";
+  font-size: 1.5rem;
+  color: var(--red);
+}
+
+div.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+div.empty-cart > img {
+  width: 128px;
+  height: 128px;
+  margin-bottom: 1rem;
+}
+
+div.empty-cart > p {
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--rose-500);
+}
