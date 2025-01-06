@@ -109,6 +109,7 @@ p.cart-message {
 
 div.empty-cart {
   display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
 }
@@ -122,5 +123,53 @@ div.empty-cart > img {
 div.empty-cart > p {
   font-size: 14px;
   line-height: 150%;
+  color: var(--rose-500);
+}
+
+div.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  line-height: 150%;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--rose-100);
+  margin-bottom: 1rem;
+}
+
+div.cart-item::after {
+  content: url("assets/images/icon-remove-item.svg");
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--rose-400);
+  border-radius: 50%;
+}
+
+div.cart-item > span {
+  display: inline-block;
+}
+
+div.cart-item-details > :first-child {
+  font-family: "RedHatText Bold";
+  color: var(--rose-900);
+  margin-bottom: 0.5rem;
+}
+
+span.cart-item-quantity {
+  font-family: "RedHatText Bold";
+  color: var(--red);
+  margin-right: 1rem;
+}
+
+span.cart-item-price {
+  color: var(--rose-500);
+  margin-right: 0.5rem;
+}
+
+span.cart-item-total {
+  font-family: "RedHatText Bold";
   color: var(--rose-500);
 }
