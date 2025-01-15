@@ -34,8 +34,9 @@ export default class Cart {
       this.total += price * quantity;
     }
   }
-  //  Builds the HTML for the cart to be displayed on the page, need to fix the counter issue, it's hacky
-  buildCart() {
+
+  //  Builds the HTML for the cart to be displayed on the page
+  renderCart() {
     let HTML = ``;
     for (const item in this.list) {
       HTML += `
@@ -61,41 +62,14 @@ export default class Cart {
       .querySelector("div.cart")
       .insertAdjacentHTML("beforeend", HTML);
   }
-}
 
-const cart = new Cart();
-
-cart.add({
-  "Classic Tiramisu": {
-    price: 5.5,
-  },
-});
-
-cart.add({
-  "Classic Tiramisu": {
-    price: 5.5,
-  },
-});
-
-cart.add({
-  "Salted Caramel Brownie": {
-    price: 4.5,
-  },
-});
-
-cart.buildCart();
-
-{
-  /* 
-<div class="cart-item">
-  <div class="cart-item-details">
-    <p>Classic Tiramisu</p>
-    <p>
-      <span class="cart-item-quantity">1x</span
-      ><span class="cart-item-price">@ $5.50</span
-      ><span class="cart-item-total">$5.50</span>
-    </p>
-  </div>
-</div> 
-*/
+  initializeAddToCartButtons() {
+    document
+      .querySelectorAll("button.add-to-cart")
+      .forEach((button) => {
+        button.addEventListener("click", (event) => {
+          console.log(event.target);
+        });
+      });
+  }
 }

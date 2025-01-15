@@ -4,9 +4,25 @@ import { fetchProducts } from "./products.js";
 // The app starts and fetchs the products and populates the page
 await fetchProducts();
 
-const addToCartButtons = document.querySelectorAll(".add-to-cart");
-addToCartButtons.forEach((button) => {
-  button.addEventListener("click", (event) => {
-    console.log(event.target);
-  });
+const cart = new Cart();
+cart.initializeAddToCartButtons();
+
+cart.add({
+  "Classic Tiramisu": {
+    price: 5.5,
+  },
 });
+
+cart.add({
+  "Classic Tiramisu": {
+    price: 5.5,
+  },
+});
+
+cart.add({
+  "Salted Caramel Brownie": {
+    price: 4.5,
+  },
+});
+
+cart.renderCart();
