@@ -34,15 +34,14 @@ export default class Cart {
       this.total += price * quantity;
     }
   }
-  //  Builds the HTML for the cart to be displayed on the page
+  //  Builds the HTML for the cart to be displayed on the page, need to fix the counter issue, it's hacky
   buildCart() {
     let HTML = ``;
     for (const item in this.list) {
-      console.log(this.list);
       HTML += `
         <div class="cart-item">
           <div class="cart-item-details">
-            <p>${Object.keys(this.list)}</p>
+            <p>${item}</p>
             <p>
               <span class="cart-item-quantity">${
                 this.list[item].quantity
@@ -75,6 +74,12 @@ cart.add({
 cart.add({
   "Classic Tiramisu": {
     price: 5.5,
+  },
+});
+
+cart.add({
+  "Salted Caramel Brownie": {
+    price: 4.5,
   },
 });
 
