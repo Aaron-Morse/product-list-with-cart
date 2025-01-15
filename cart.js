@@ -52,4 +52,6 @@ cart.add({
   },
 });
 
+cart.decrement("waffle");
+
 console.log(cart.list);
