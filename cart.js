@@ -28,20 +28,21 @@ export default class Cart {
   }
 
   // Calcuatles cart total
-  generateTotal() {
+  cartTotal() {
     for (const key in this.list) {
       const { price, quantity } = this.list[key];
       this.total += price * quantity;
     }
   }
-
+  //  Builds the HTML for the cart to be displayed on the page
   buildCart() {
     let HTML = ``;
     for (const item in this.list) {
+      console.log(this.list);
       HTML += `
         <div class="cart-item">
           <div class="cart-item-details">
-            <p>${this.list[item]}</p>
+            <p>${Object.keys(this.list)}</p>
             <p>
               <span class="cart-item-quantity">${
                 this.list[item].quantity
@@ -49,9 +50,9 @@ export default class Cart {
               ><span class="cart-item-price">@ $${this.list[
                 item
               ].price.toFixed(2)}</span
-              ><span class="cart-item-total">$${this.list[
-                item
-              ].price.toFixed(2)}</span>
+              ><span class="cart-item-total">$${(
+                this.list[item].price * this.list[item].quantity
+              ).toFixed(2)}</span>
             </p>
           </div>
         </div> 
@@ -70,6 +71,14 @@ cart.add({
     price: 5.5,
   },
 });
+
+cart.add({
+  "Classic Tiramisu": {
+    price: 5.5,
+  },
+});
+
+cart.buildCart();
 
 {
   /* 
