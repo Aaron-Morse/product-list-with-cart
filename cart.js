@@ -35,23 +35,53 @@ export default class Cart {
     }
   }
 
-  buildCart() {}
+  buildCart() {
+    let HTML = ``;
+    for (const item in this.list) {
+      HTML += `
+        <div class="cart-item">
+          <div class="cart-item-details">
+            <p>${this.list[item]}</p>
+            <p>
+              <span class="cart-item-quantity">${
+                this.list[item].quantity
+              }x</span
+              ><span class="cart-item-price">@ $${this.list[
+                item
+              ].price.toFixed(2)}</span
+              ><span class="cart-item-total">$${this.list[
+                item
+              ].price.toFixed(2)}</span>
+            </p>
+          </div>
+        </div> 
+      `;
+    }
+    document
+      .querySelector("div.cart")
+      .insertAdjacentHTML("beforeend", HTML);
+  }
 }
 
 const cart = new Cart();
 
 cart.add({
-  waffle: {
-    price: 6.5,
+  "Classic Tiramisu": {
+    price: 5.5,
   },
 });
 
-cart.add({
-  waffle: {
-    price: 6.5,
-  },
-});
-
-cart.decrement("waffle");
-
-console.log(cart.list);
+{
+  /* 
+<div class="cart-item">
+  <div class="cart-item-details">
+    <p>Classic Tiramisu</p>
+    <p>
+      <span class="cart-item-quantity">1x</span
+      ><span class="cart-item-price">@ $5.50</span
+      ><span class="cart-item-total">$5.50</span>
+    </p>
+  </div>
+</div> 
+*/
+}
