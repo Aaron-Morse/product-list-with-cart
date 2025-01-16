@@ -6,19 +6,17 @@ export async function fetchProducts() {
     }
     const data = await response.json();
     console.log("Data loaded:", data);
-    await buildProducts(data);
-    // initializeCartButtons();
+    buildProducts(data);
   } catch (error) {
     console.error("Error loading data:", error);
   }
 }
 
-// Try using Object.values instead of a for of loop to see how that looks
+// Takes fetched products and builds out the HTML to be inserted into the DOM
 function buildProducts(data) {
-  return new Promise((resolve) => {
-    let HTML = ``;
-    for (const item of data) {
-      HTML += `
+  let HTML = ``;
+  for (const item of data) {
+    HTML += `
         <section>
           <div class="add-to-cart-container">
             <img src="${item.image.mobile}" alt="${item.name}" />
@@ -31,10 +29,8 @@ function buildProducts(data) {
           }">$${item.price.toFixed(2)}</p>
         </section>
       `;
-    }
-    document
-      .querySelector("main")
-      .insertAdjacentHTML("afterbegin", HTML);
-    resolve();
-  });
+  }
+  document
+    .querySelector("main")
+    .insertAdjacentHTML("afterbegin", HTML);
 }
