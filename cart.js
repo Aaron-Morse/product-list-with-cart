@@ -37,6 +37,7 @@ export default class Cart {
 
   //  Builds the HTML for the cart to be displayed on the page
   renderCart() {
+    document.querySelector("div.cart").innerHTML = "";
     let HTML = ``;
     for (const item in this.list) {
       HTML += `
@@ -63,12 +64,22 @@ export default class Cart {
       .insertAdjacentHTML("beforeend", HTML);
   }
 
+  // Adds evemt listener to add to cart buttons
   initializeAddToCartButtons() {
     document
       .querySelectorAll("button.add-to-cart")
       .forEach((button) => {
         button.addEventListener("click", (event) => {
-          console.log(event.target);
+          const name =
+            event.target.parentElement.parentElement.dataset.name;
+          const price =
+            event.target.parentElement.parentElement.dataset.price;
+          this.add({
+            [name]: {
+              price: parseFloat(price),
+            },
+          });
+          this.renderCart();
         });
       });
   }
