@@ -100,7 +100,7 @@ div.cart {
   border-radius: 0.5rem;
 }
 
-p.cart-message {
+p.cart-quantity {
   margin-bottom: 1.5rem;
   font-family: "RedHatText Bold";
   font-size: 1.5rem;
@@ -109,7 +109,6 @@ p.cart-message {
 
 div.empty-cart {
   display: flex;
-  display: none;
   flex-direction: column;
   align-items: center;
 }

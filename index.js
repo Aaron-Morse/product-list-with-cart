@@ -6,23 +6,3 @@ await fetchProducts();
 
 const cart = new Cart();
 cart.initializeAddToCartButtons();
-
-// cart.add({
-//   "Classic Tiramisu": {
-//     price: 5.5,
-//   },
-// });
-
-// cart.add({
-//   "Classic Tiramisu": {
-//     price: 5.5,
-//   },
-// });
-
-// cart.add({
-//   "Salted Caramel Brownie": {
-//     price: 4.5,
-//   },
-// });
-
-cart.renderCart();

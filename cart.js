@@ -37,7 +37,16 @@ export default class Cart {
 
   //  Builds the HTML for the cart to be displayed on the page
   renderCart() {
-    document.querySelector("div.cart").innerHTML = "";
+    const toggleEmptyCartMesage = Object.keys(this.list).length
+      ? "none"
+      : "block";
+
+    document.querySelector("div.empty-cart").style.display =
+      toggleEmptyCartMesage;
+
+    // cart is cleared before being rebuilt
+    document.querySelector("div.cart-contents").innerHTML = "";
+    // HTML is built to display the cart items
     let HTML = ``;
     for (const item in this.list) {
       HTML += `
@@ -60,7 +69,7 @@ export default class Cart {
       `;
     }
     document
-      .querySelector("div.cart")
+      .querySelector("div.cart-contents")
       .insertAdjacentHTML("beforeend", HTML);
   }
 
@@ -79,6 +88,7 @@ export default class Cart {
               price: parseFloat(price),
             },
           });
+          // renderCart method is called to update the cart
           this.renderCart();
         });
       });
