@@ -27,6 +27,16 @@ export default class Cart {
     delete this.list[key];
   }
 
+  // Calculate number of items in cart
+  cartQuantity() {
+    const quantity = Object.values(this.list).reduce(
+      (total, value) => (total += value.quantity),
+      0
+    );
+    document.querySelector("span.cart-quantity").textContent =
+      quantity;
+  }
+
   // Calcuatles cart total
   cartTotal() {
     for (const key in this.list) {
@@ -35,15 +45,19 @@ export default class Cart {
     }
   }
 
-  //  Builds the HTML for the cart to be displayed on the page
-  renderCart() {
-    // toggleEmptyCartMesage is used to determine if the empty cart message should be displayed
-    const toggleEmptyCartMesage = Object.keys(this.list).length
+  // toggleEmptyCartMesage is used to determine if the empty cart message should be displayed
+  toggleEmptyCartMesage() {
+    const toggleDisplayProperty = Object.keys(this.list).length
       ? "none"
       : "block";
 
     document.querySelector("div.empty-cart").style.display =
-      toggleEmptyCartMesage;
+      toggleDisplayProperty;
+  }
+
+  //  Builds the HTML for the cart to be displayed on the page
+  renderCart() {
+    this.toggleEmptyCartMesage();
 
     // cart is cleared before being rebuilt
     document.querySelector("div.cart-contents").innerHTML = "";
@@ -69,6 +83,8 @@ export default class Cart {
         </div> 
       `;
     }
+    // Updates the amount of items in the cart every render based on the cart contents
+    this.cartQuantity();
     document
       .querySelector("div.cart-contents")
       .insertAdjacentHTML("beforeend", HTML);
