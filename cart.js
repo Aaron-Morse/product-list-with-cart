@@ -37,6 +37,7 @@ export default class Cart {
 
   //  Builds the HTML for the cart to be displayed on the page
   renderCart() {
+    // toggleEmptyCartMesage is used to determine if the empty cart message should be displayed
     const toggleEmptyCartMesage = Object.keys(this.list).length
       ? "none"
       : "block";
@@ -75,14 +76,11 @@ export default class Cart {
 
   // Adds evemt listener to add to cart buttons
   initializeAddToCartButtons() {
-    document
-      .querySelectorAll("button.add-to-cart")
-      .forEach((button) => {
-        button.addEventListener("click", (event) => {
-          const name =
-            event.target.parentElement.parentElement.dataset.name;
-          const price =
-            event.target.parentElement.parentElement.dataset.price;
+    document.querySelectorAll(".product").forEach((product) => {
+      product.addEventListener("click", (event) => {
+        if (event.target.tagName === "BUTTON") {
+          const name = product.dataset.name;
+          const price = product.dataset.price;
           this.add({
             [name]: {
               price: parseFloat(price),
@@ -90,7 +88,8 @@ export default class Cart {
           });
           // renderCart method is called to update the cart
           this.renderCart();
-        });
+        }
       });
+    });
   }
 }

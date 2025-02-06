@@ -17,7 +17,9 @@ function buildProducts(data) {
   let HTML = ``;
   for (const item of data) {
     HTML += `
-        <section data-name="${item.name}" data-price="${item.price}">
+        <section class="product" data-name="${
+          item.name
+        }" data-price="${item.price}">
           <div class="add-to-cart-container">
             <img src="${item.image.mobile}" alt="${item.name}" />
             <button class="add-to-cart">Add to Cart</button>
