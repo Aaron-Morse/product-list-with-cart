@@ -1,7 +1,7 @@
 export default class Cart {
   constructor() {
-    this.total = 0;
     this.list = {};
+    this.initializeAddToCartButtons();
   }
 
   // add/increment item in cart
@@ -30,19 +30,32 @@ export default class Cart {
   // Calculate number of items in cart
   cartQuantity() {
     const quantity = Object.values(this.list).reduce(
-      (total, value) => (total += value.quantity),
+      (total, item) => (total += item.quantity),
       0
     );
     document.querySelector("span.cart-quantity").textContent =
       quantity;
   }
 
-  // Calcuatles cart total
-  cartTotal() {
-    for (const key in this.list) {
-      const { price, quantity } = this.list[key];
-      this.total += price * quantity;
-    }
+  calculateCartTotal() {
+    const total = Object.values(this.list).reduce(
+      (total, item) => (total += item.price * item.quantity),
+      0
+    );
+
+    let HTML = `
+      <div class="order-total-container">
+        <span class="order-total-message">Order Total</span><span class="order-total-amount">$${total.toFixed(
+          2
+        )}</span> 
+      </div>
+      <div class="eco-message">
+      <p>This is a <span>carbon-neutral</span> delivery</p>
+      </div>
+      <button class="confirm-order">Confirm Order</button>
+    `;
+
+    document.querySelector("div.cart-total").innerHTML = HTML;
   }
 
   // toggleEmptyCartMesage is used to determine if the empty cart message should be displayed
@@ -61,6 +74,7 @@ export default class Cart {
 
     // cart is cleared before being rebuilt
     document.querySelector("div.cart-contents").innerHTML = "";
+
     // HTML is built to display the cart items
     let HTML = ``;
     for (const item in this.list) {
@@ -83,11 +97,16 @@ export default class Cart {
         </div> 
       `;
     }
+
     // Updates the amount of items in the cart every render based on the cart contents
     this.cartQuantity();
+
     document
       .querySelector("div.cart-contents")
       .insertAdjacentHTML("beforeend", HTML);
+
+    // Displays the calculated cart total
+    this.calculateCartTotal();
   }
 
   // Adds evemt listener to add to cart buttons

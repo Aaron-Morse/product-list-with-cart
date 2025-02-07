@@ -172,3 +172,55 @@ span.cart-item-total {
   font-family: "RedHatText Bold";
   color: var(--rose-500);
 }
+
+div.order-total-container {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+span.order-total-message {
+  font-size: 14px;
+  color: var(--rose-900);
+}
+
+span.order-total-amount {
+  font-size: 1.5rem;
+  color: var(--rose-900);
+  font-family: "RedHatText Bold";
+}
+
+div.eco-message::before {
+  content: url(./assets/images/icon-carbon-neutral.svg);
+  margin-right: 0.5rem;
+}
+
+div.eco-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  background: var(--rose-50);
+  padding: 1rem;
+  font-size: 14px;
+  border-radius: 0.5rem;
+}
+
+div.eco-message > p > span {
+  display: inline-block;
+  font-family: "RedHatText Bold";
+}
+
+button.confirm-order {
+  margin-bottom: 1.5rem;
+  border: none;
+  width: 100%;
+  color: var(--white);
+  background: var(--red);
+  font-size: 1rem;
+  font-family: "RedHatText SemiBold";
+  padding: 1rem;
+  border-radius: 2rem;
+}

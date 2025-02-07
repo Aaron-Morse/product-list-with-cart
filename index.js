@@ -5,4 +5,3 @@ import { fetchProducts } from "./products.js";
 await fetchProducts();
 
 const cart = new Cart();
-cart.initializeAddToCartButtons();
