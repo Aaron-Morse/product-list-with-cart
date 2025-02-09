@@ -26,9 +26,7 @@ function buildProducts(data) {
           </div>
           <h3>${item.category}</h3>
           <h2>${item.name}</h2>
-          <p class="price" data-value="${
-            item.price
-          }">$${item.price.toFixed(2)}</p>
+          <p class="price">$${item.price.toFixed(2)}</p>
         </section>
       `;
   }

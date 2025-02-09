@@ -60,26 +60,34 @@ export default class Cart {
 
   // toggleEmptyCartMesage is used to determine if the empty cart message should be displayed
   toggleEmptyCartMesage() {
-    const toggleDisplayProperty = Object.keys(this.list).length
-      ? "none"
-      : "block";
+    const displayValue = Object.keys(this.list).length ? "none" : "";
 
     document.querySelector("div.empty-cart").style.display =
-      toggleDisplayProperty;
+      displayValue;
   }
 
   //  Builds the HTML for the cart to be displayed on the page
   renderCart() {
+    // Updates the amount of items in the cart every render based on the cart contents
+    this.cartQuantity();
+
+    // Cart is cleared before being rebuilt
+    document.querySelector("div.cart-contents").innerHTML = "";
+
+    // Checks to see if the cart is empty and then will/will not display messaging
     this.toggleEmptyCartMesage();
 
-    // cart is cleared before being rebuilt
-    document.querySelector("div.cart-contents").innerHTML = "";
+    // Cart total is cleared before rebuild to take into account an empty cart
+    document.querySelector("div.cart-total").innerHTML = "";
+
+    // Guard clause to block the cart from populating if empty
+    if (!Object.entries(this.list).length) return;
 
     // HTML is built to display the cart items
     let HTML = ``;
     for (const item in this.list) {
       HTML += `
-        <div class="cart-item">
+        <div class="cart-item" data-name="${item}">
           <div class="cart-item-details">
             <p>${item}</p>
             <p>
@@ -94,19 +102,23 @@ export default class Cart {
               ).toFixed(2)}</span>
             </p>
           </div>
+          <button class="delete-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 10"><path fill="#CAAFA7" d="M8.375 9.375 5 6 1.625 9.375l-1-1L4 5 .625 1.625l1-1L5 4 8.375.625l1 1L6 5l3.375 3.375-1 1Z"/></svg>
+          </button>
         </div> 
       `;
     }
 
-    // Updates the amount of items in the cart every render based on the cart contents
-    this.cartQuantity();
-
+    // Inserts the built out cart contents into the cart
     document
       .querySelector("div.cart-contents")
       .insertAdjacentHTML("beforeend", HTML);
 
     // Displays the calculated cart total
     this.calculateCartTotal();
+
+    // Adds the listeners to the delete from cart buttons
+    this.initializeDeleteFromCartButtons();
   }
 
   // Adds evemt listener to add to cart buttons
@@ -122,6 +134,18 @@ export default class Cart {
             },
           });
           // renderCart method is called to update the cart
+          this.renderCart();
+        }
+      });
+    });
+  }
+
+  initializeDeleteFromCartButtons() {
+    document.querySelectorAll("div.cart-item").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        console.log(event.target.tagName);
+        if (event.target.tagName === "BUTTON") {
+          this.remove(item.dataset.name);
           this.renderCart();
         }
       });

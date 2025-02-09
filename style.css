@@ -136,15 +136,25 @@ div.cart-item {
   margin-bottom: 1rem;
 }
 
-div.cart-item::after {
-  content: url("assets/images/icon-remove-item.svg");
-  width: 1rem;
-  height: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid var(--rose-400);
+button.delete-item {
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+button.delete-item > svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1.5px solid var(--rose-400);
   border-radius: 50%;
+  padding: 2.5px;
+  pointer-events: none;
+}
+
+button.delete-item > svg > path {
+  fill: var(--rose-400);
+  pointer-events: none;
 }
 
 div.cart-item > span {
@@ -158,7 +168,7 @@ div.cart-item-details > :first-child {
 }
 
 span.cart-item-quantity {
-  font-family: "RedHatText Bold";
+  font-family: "RedHatText SemiBold";
   color: var(--red);
   margin-right: 1rem;
 }
@@ -169,7 +179,7 @@ span.cart-item-price {
 }
 
 span.cart-item-total {
-  font-family: "RedHatText Bold";
+  font-family: "RedHatText SemiBold";
   color: var(--rose-500);
 }
 
@@ -210,7 +220,7 @@ div.eco-message {
 
 div.eco-message > p > span {
   display: inline-block;
-  font-family: "RedHatText Bold";
+  font-family: "RedHatText SemiBold";
 }
 
 button.confirm-order {
