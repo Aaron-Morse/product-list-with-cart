@@ -38,6 +38,11 @@ export default class Cart {
   }
 
   calculateCartTotal() {
+    document.querySelector("div.cart-total").innerHTML = "";
+
+    // Guard clause to block cart total from being populated and added if the cart is empty
+    if (!Object.entries(this.list).length) return;
+
     const total = Object.values(this.list).reduce(
       (total, item) => (total += item.price * item.quantity),
       0
@@ -66,21 +71,11 @@ export default class Cart {
       displayValue;
   }
 
-  //  Builds the HTML for the cart to be displayed on the page
-  renderCart() {
-    // Updates the amount of items in the cart every render based on the cart contents
-    this.cartQuantity();
-
+  renderCartContents() {
     // Cart is cleared before being rebuilt
     document.querySelector("div.cart-contents").innerHTML = "";
 
-    // Checks to see if the cart is empty and then will/will not display messaging
-    this.toggleEmptyCartMesage();
-
-    // Cart total is cleared before rebuild to take into account an empty cart
-    document.querySelector("div.cart-total").innerHTML = "";
-
-    // Guard clause to block the cart from populating if empty
+    // Guard close to block cart contents from being created and added if cart is empty
     if (!Object.entries(this.list).length) return;
 
     // HTML is built to display the cart items
@@ -114,11 +109,23 @@ export default class Cart {
       .querySelector("div.cart-contents")
       .insertAdjacentHTML("beforeend", HTML);
 
-    // Displays the calculated cart total
-    this.calculateCartTotal();
-
     // Adds the listeners to the delete from cart buttons
     this.initializeDeleteFromCartButtons();
+  }
+
+  //  Builds the HTML for the cart to be displayed on the page
+  renderCart() {
+    // Updates the amount of items in the cart every render based on the cart contents
+    this.cartQuantity();
+
+    // Checks to see if the cart is empty and then will/will not display messaging
+    this.toggleEmptyCartMesage();
+
+    // Renders the cart contents and adds to the page
+    this.renderCartContents();
+
+    // Displays the calculated cart total
+    this.calculateCartTotal();
   }
 
   // Adds evemt listener to add to cart buttons
@@ -143,7 +150,6 @@ export default class Cart {
   initializeDeleteFromCartButtons() {
     document.querySelectorAll("div.cart-item").forEach((item) => {
       item.addEventListener("click", (event) => {
-        console.log(event.target.tagName);
         if (event.target.tagName === "BUTTON") {
           this.remove(item.dataset.name);
           this.renderCart();
