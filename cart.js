@@ -140,9 +140,13 @@ export default class Cart {
               price: parseFloat(price),
             },
           });
+          // Sets the add to cart button to display none so the added to cart button can show
           event.target.style.display = "none";
+          // Sets the added to cart style to display flex so it's visibile
           product.querySelector(".added-to-cart").style.display =
             "flex";
+          // Selects the product image and adds a border to highlight it's in the cart
+          product.querySelector("img").classList.add("in-cart");
           this.renderCart();
         }
 
@@ -182,6 +186,7 @@ export default class Cart {
           );
           product.querySelector(".added-to-cart").style.display =
             "none";
+          product.querySelector("img").classList.remove("in-cart");
           product.querySelector(".add-to-cart").style.display =
             "flex";
         }

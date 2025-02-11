@@ -59,6 +59,10 @@ img {
   overflow: hidden;
 }
 
+img.in-cart {
+  border: 2px solid var(--red);
+}
+
 button.add-to-cart::before {
   content: url("assets/images/icon-add-to-cart.svg");
   margin-right: 0.5rem;
