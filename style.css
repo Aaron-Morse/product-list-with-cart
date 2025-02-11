@@ -186,6 +186,7 @@ button.delete-item {
   pointer-events: auto;
 }
 
+/* Delete button svg section */
 button.delete-item > svg {
   width: 1.25rem;
   height: 1.25rem;
