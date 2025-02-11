@@ -175,6 +175,15 @@ export default class Cart {
         if (event.target.tagName === "BUTTON") {
           this.remove(item.dataset.name);
           this.renderCart();
+
+          // The below sections updates the add to cart button back to its original state
+          const product = document.querySelector(
+            `[data-name="${item.dataset.name}"]`
+          );
+          product.querySelector(".added-to-cart").style.display =
+            "none";
+          product.querySelector(".add-to-cart").style.display =
+            "flex";
         }
       });
     });
