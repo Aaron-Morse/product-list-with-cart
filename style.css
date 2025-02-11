@@ -70,11 +70,50 @@ button.add-to-cart {
   align-items: center;
   margin-top: -1.5rem;
   margin-bottom: 1rem;
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 2rem;
   background-color: var(--white);
   border: 1px solid var(--green);
   border-radius: 2rem;
   cursor: pointer;
+  /* display: none; */
+}
+
+/* The added to cart button section */
+div.added-to-cart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -1.5rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem 0.75rem;
+  background-color: var(--red);
+  border-radius: 2rem;
+  display: none;
+}
+
+div.added-to-cart button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1px solid var(--white);
+  border-radius: 50%;
+  background: inherit;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+div.added-to-cart svg,
+div.added-to-cart path {
+  pointer-events: none;
+}
+
+div.added-to-cart p.button-quantity {
+  margin-left: 2.75rem;
+  margin-right: 2.75rem;
+  color: var(--white);
+  font-size: 14px;
 }
 
 h2 {

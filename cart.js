@@ -1,7 +1,7 @@
 export default class Cart {
   constructor() {
     this.list = {};
-    this.initializeAddToCartButtons();
+    this.enableCartButtons();
   }
 
   // add/increment item in cart
@@ -27,8 +27,7 @@ export default class Cart {
     delete this.list[key];
   }
 
-  // Calculate number of items in cart
-  cartQuantity() {
+  calculateCartQuantity() {
     const quantity = Object.values(this.list).reduce(
       (total, item) => (total += item.quantity),
       0
@@ -63,8 +62,8 @@ export default class Cart {
     document.querySelector("div.cart-total").innerHTML = HTML;
   }
 
-  // toggleEmptyCartMesage is used to determine if the empty cart message should be displayed
-  toggleEmptyCartMesage() {
+  // Determine if the empty cart message should be displayed
+  emptyCartMessage() {
     const displayValue = Object.keys(this.list).length ? "none" : "";
 
     document.querySelector("div.empty-cart").style.display =
@@ -109,17 +108,17 @@ export default class Cart {
       .querySelector("div.cart-contents")
       .insertAdjacentHTML("beforeend", HTML);
 
-    // Adds the listeners to the delete from cart buttons
-    this.initializeDeleteFromCartButtons();
+    // Adds the event listeners to the delete buttons to remove from cart
+    this.enableRemoveFromCart();
   }
 
   //  Builds the HTML for the cart to be displayed on the page
   renderCart() {
     // Updates the amount of items in the cart every render based on the cart contents
-    this.cartQuantity();
+    this.calculateCartQuantity();
 
     // Checks to see if the cart is empty and then will/will not display messaging
-    this.toggleEmptyCartMesage();
+    this.emptyCartMessage();
 
     // Renders the cart contents and adds to the page
     this.renderCartContents();
@@ -128,26 +127,49 @@ export default class Cart {
     this.calculateCartTotal();
   }
 
-  // Adds evemt listener to add to cart buttons
-  initializeAddToCartButtons() {
+  // Adds event listener to add to cart buttons
+  enableCartButtons() {
     document.querySelectorAll(".product").forEach((product) => {
       product.addEventListener("click", (event) => {
-        if (event.target.tagName === "BUTTON") {
-          const name = product.dataset.name;
-          const price = product.dataset.price;
+        const name = product.dataset.name;
+        const price = product.dataset.price;
+
+        if (event.target.className === "add-to-cart") {
           this.add({
             [name]: {
               price: parseFloat(price),
             },
           });
-          // renderCart method is called to update the cart
+          event.target.style.display = "none";
+          product.querySelector(".added-to-cart").style.display =
+            "flex";
           this.renderCart();
         }
+
+        if (event.target.tagName === "BUTTON") {
+          if (event.target.className === "decrement-button") {
+            this.decrement(name);
+            this.renderCart();
+          }
+
+          if (event.target.className === "increment-button") {
+            this.add({
+              [name]: {
+                price: parseFloat(price),
+              },
+            });
+            this.renderCart();
+          }
+        }
+
+        product.querySelector("p.button-quantity").textContent =
+          this.list[name].quantity;
       });
     });
   }
 
-  initializeDeleteFromCartButtons() {
+  // Adds event listener to the remove from cart button
+  enableRemoveFromCart() {
     document.querySelectorAll("div.cart-item").forEach((item) => {
       item.addEventListener("click", (event) => {
         if (event.target.tagName === "BUTTON") {
